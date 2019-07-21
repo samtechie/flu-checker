@@ -5,12 +5,12 @@ import CheckerForm from './Components/CheckerForm';
 import TemperatureInput from './Components/TemperatureInput';
 import CheckButton from './Components/CheckButton';
 
-export default class App extends React.Component() {
+export default class App extends React.Component {
   handleFluCheck =() => {
     console.log('Test')
   }
   render(){
-    const temperature ='81'
+    //const temperature ='81'
   return (
     <View style={styles.container}>
       <Text>Flu-Checker</Text>

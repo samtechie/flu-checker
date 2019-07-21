@@ -2,11 +2,9 @@ import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
 export default class TemperatureInput extends React.Component {
-  state = {
-    text: '',
-  }
+
   handleTextChange = (text) => {
-     this.setState({text});
+     console.log("Test");
   }
   render(){
     return(
@@ -16,7 +14,6 @@ export default class TemperatureInput extends React.Component {
           style={styles.TextInputStyle}
          keyboardType={'numeric'}
          onChangeText={this.handleTextChange}
-         value={text}
       />
     )
   }

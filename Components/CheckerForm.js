@@ -20,8 +20,6 @@ export default class CheckerForm extends React.Component {
     </View>
 
      )
-
    }
-
 
 }
