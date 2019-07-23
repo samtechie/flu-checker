@@ -23,9 +23,6 @@ export default class App extends React.Component {
        this.setState({ result: 'No' });
      }
 
-    //console.log(this.state.temperature);
-    //console.log(this.state.cough + "for cough");
-    //console.log(this.state.fever + "for fever");
   }
   handleTemperatureInput =(text) =>{
      this.setState({temperature: parseInt(text)})
