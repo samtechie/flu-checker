@@ -4,26 +4,68 @@ import { Constants } from "expo";
 import CheckerForm from './Components/CheckerForm';
 import TemperatureInput from './Components/TemperatureInput';
 import CheckButton from './Components/CheckButton';
+import Result from './Components/Result'
 
 export default class App extends React.Component {
+  state = {
+    fever: '',
+    cough: '',
+    temperature: 0,
+    displayResult: false,
+    result: ''
+  }
   handleFluCheck =() => {
-    console.log('Test')
+    const { temperature, cough, fever } = this.state;
+     this.setState({displayResult: true})
+     if(temperature > 38 && cough === 'yes' && fever === 'yes'){
+       this.setState({result:'Yes'})
+     }else{
+       this.setState({ result: 'No' });
+     }
+
+    //console.log(this.state.temperature);
+    //console.log(this.state.cough + "for cough");
+    //console.log(this.state.fever + "for fever");
+  }
+  handleTemperatureInput =(text) =>{
+     this.setState({temperature: parseInt(text)})
+     console.log(text + " is your temperature");
+  }
+
+  handleCoughCheck =(checkedId) => {
+      this.setState({cough: checkedId})
+      console.log(checkedId + " for cough");
+  }
+  handleFeverCheck =(checkedId) =>{
+     this.setState({ fever: checkedId });
+      console.log(checkedId + " for fever");
   }
   render(){
-    //const temperature ='81'
+    const {displayResult,result } = this.state
   return (
-    <View style={styles.container}>
-      <Text>Flu-Checker</Text>
-      <Text>Have you had fever over the last five days?</Text>
-       <CheckerForm/>
-      <Text>Temperature Measurement</Text>
-        <TemperatureInput placeholder='Enter your temperature'/>
-      <Text>Have you had Cough?</Text>
-       <CheckerForm/>
-      <CheckButton onPress={this.handleFluCheck}/>
 
-    </View>
-  );
+  <View style={styles.container}>
+      <Text>Flu-Checker</Text>
+         <Text>Have you had fever over the last five days?</Text>
+      <CheckerForm onCheck={this.handleFeverCheck}/>
+      <Text>Temperature Measurement</Text>
+         <TemperatureInput
+          placeholder="Enter your temperature"
+          onSubmit={this.handleTemperatureInput}
+         />
+      <Text>Have you had Cough?</Text>
+        <CheckerForm onCheck={this.handleCoughCheck}/>
+      <CheckButton onPress={this.handleFluCheck} />
+      {displayResult ? (
+          <Result result={result}
+
+          />
+        ) : (
+           <View>
+             <Text>Check if you have flu</Text>
+           </View>
+        )}
+    </View>)
   }
 }
 

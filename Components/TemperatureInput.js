@@ -2,18 +2,34 @@ import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
 export default class TemperatureInput extends React.Component {
+  state = {
+    text: ''
+  }
 
   handleTextChange = (text) => {
-     console.log("Test");
+     this.setState({text});
   }
+  handleSubmitEditing = () => {
+    const { onSubmit } = this.props;
+    const { text } = this.state;
+
+    if (!text) return;
+
+    onSubmit(text);
+    this.setState({ text: '' });
+  };
   render(){
+    const { placeholder } = this.props;
+    const { text } = this.state;
     return(
       <TextInput
           placeholder={this.props.placeholder}
+          value={text}
           underlineColorAndroid='transparent'
           style={styles.TextInputStyle}
          keyboardType={'numeric'}
          onChangeText={this.handleTextChange}
+         onSubmitEditing={this.handleSubmitEditing}
       />
     )
   }
